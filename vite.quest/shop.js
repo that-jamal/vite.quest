@@ -4,6 +4,7 @@ let item2 = false
 let item1 = false
 let shopkeeper = document.getElementById("shopkeeper")
 let dialog = document.getElementById("text_page")
+
 //dialog
 
 

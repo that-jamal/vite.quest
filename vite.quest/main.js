@@ -1,3 +1,5 @@
+
+
 let back = document.body
 let rightbtn = document.getElementById("rightbtn")
 let leftbtn = document.getElementById("leftbtn")
@@ -5,6 +7,8 @@ let midbtn = document.getElementById("midbtn")
 let backwardbtn = document.getElementById("backwardbtn")
 let name = document.getElementById("name")
 let item = document.getElementById("item")
+let shopkeeper = document.getElementById("shopkeeper")
+let dialog = document.getElementById("text_page")
 
 frame = [
   {//0
@@ -128,11 +132,12 @@ function items() {
 
 }
 
-function left() {
+leftbtn.addEventListener("click", function () {
   if (leftbtn.innerText == "EXIT") {
     exit()
   } else if (leftbtn.innerText == "ENTER") {
     enter()
+    console.log("idk man")
   } else {
     nextId = (frame[nextId].leftmapId)
     mapAdd()
@@ -149,9 +154,10 @@ function left() {
     leftbtn.classList.add("hidden")
   }
   item.src = ""
-}
+})
 
-function right() {
+rightbtn.addEventListener("click", function () {
+
   nextId = (frame[nextId].rightmapId)
   mapAdd()
   if (name.innerText == "door") {
@@ -166,7 +172,7 @@ function right() {
     rightbtn.classList.add("hidden")
     leftbtn.classList.add("hidden")
   }
-}
+});
 
 function mid() {
   nextId = (frame[nextId].mapId)
