@@ -1,4 +1,4 @@
-let quest1 = false
+/* let quest1 = false
 let quest2 = true
 let item2 = false
 let item1 = false
@@ -12,8 +12,8 @@ let iskclose = "https://cdn.discordapp.com/attachments/691020853248262184/108333
 let iskopen = "https://cdn.discordapp.com/attachments/691020853248262184/1083334156131512320/isaktranslusent2.png"
 let iskrecive = "https://cdn.discordapp.com/attachments/691020853248262184/1083334156357992479/recive_isk.png"
 
-function shop() {
-
+shopkeeper.addEventListener("click", function () {
+    console.log("hm")
     if (quest2) {
         console.log(quest2)
     }
@@ -69,6 +69,6 @@ function shop() {
     }
 
 
-}
-
+})
+*/
 
