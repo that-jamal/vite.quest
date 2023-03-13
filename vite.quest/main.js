@@ -87,7 +87,7 @@ function enter() {
     }
   }
   else {
-    shopkeeper.src = isakclose
+    shopkeeper.src = iskclose
   }
   dialog.innerText = "..."
   rightbtn.classList.add("hidden")
