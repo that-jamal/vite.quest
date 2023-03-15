@@ -16,7 +16,7 @@ let name = document.getElementById("name")
 let item = document.getElementById("item")
 let dialog = document.getElementById("text_page")
 
-frame = [
+const frame = [
   {//0
     view: "url('https://cdn.discordapp.com/attachments/678621053026828309/1073160741273731082/image.png')", leftbutton: "ENTER", rightbutton: "RIGHT", midbutton: "FORWARD", backbutton: "BACK",
     mapId: 3, rightmapId: 1, leftmapId: 0, backmapId: 0, location: "central"
