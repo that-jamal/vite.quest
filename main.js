@@ -5,8 +5,6 @@ let item1 = false
 let shopkeeper = document.getElementById("shopkeeper")
 //let dialog = document.getElementById("text_page")
 
-//dialog
-
 let back = document.body
 let rightbtn = document.getElementById("rightbtn")
 let leftbtn = document.getElementById("leftbtn")
@@ -15,7 +13,7 @@ let backwardbtn = document.getElementById("backwardbtn")
 let name = document.getElementById("name")
 let item = document.getElementById("item")
 let dialog = document.getElementById("text_page")
-
+//stores all the inforamtion about all the locations and names of each location and button
 const frame = [
   {//0
     view: "url('https://cdn.discordapp.com/attachments/678621053026828309/1073160741273731082/image.png')", leftbutton: "ENTER", rightbutton: "RIGHT", midbutton: "FORWARD", backbutton: "BACK",
@@ -60,7 +58,7 @@ const frame = [
 //nextId = (frame[nextId].leftmapId)
 
 let nextId = 0
-
+//exit function removes the shopkeeper and adds all the buttons
 function exit() {
   shopkeeper.src = ""
   dialog.innerText = " "
@@ -70,6 +68,7 @@ function exit() {
   mapAdd()
 }
 
+//if the player enters the shop it adds the shopkeeper and if u have an item the shopkeeper holds his hand to recive it 
 function enter() {
   if (!quest1) {
     if (item1) {
@@ -99,10 +98,16 @@ function enter() {
   nextId = 0
 }
 
+//the back button 
 backwardbtn.addEventListener("click", function () {
+  //next location for the back button
   nextId = (frame[nextId].backmapId)
+  // removes items so they dont follow u out without picking em up
   item.src = ""
+  //runs the next location and adds it to all the buttons
   mapAdd()
+
+  // if the player is in the forest it adds the mid buttons or if the player in on the road it adds right and left buttons 
   if (name.innerText == "forest road") {
     midbtn.classList.remove("hidden")
   } else if (name.innerText == "road") {
@@ -110,27 +115,35 @@ backwardbtn.addEventListener("click", function () {
     midbtn.classList.remove("hidden")
   }
 
+  // if the player is in the central it adds the right and left buttons 
   if (name.innerText == "central") {
     rightbtn.classList.remove("hidden")
     leftbtn.classList.remove("hidden")
   }
+
+  // if ur on the streets it adds the right and left buttons 
   if (name.innerText == "street") {
     rightbtn.classList.remove("hidden")
     leftbtn.classList.remove("hidden")
   }
+  // if the player is in the woods it adds the mid button 
   if (name.innerText == "woods") {
     midbtn.classList.remove("hidden")
   }
+  // else if the its a door it adds the middle button and left
   if (name.innerText == "door") {
     midbtn.classList.remove("hidden")
     leftbtn.classList.remove("hidden")
   }
 })
 
+// items funcion
 item.addEventListener("click", function () {
+  // if the player collects an item it gets removed and adds item1 to true 
   if (item.src == "https://cdn.discordapp.com/attachments/691020853248262184/1082946793211449454/pixel_computer.png") {
     item.src = ""
     item1 = true
+    //if the player collects an item it gets removed and adds item2 to true 
   } else if (item.src == "https://cdn.discordapp.com/attachments/691020853248262184/1083278564549468190/pixel_stone.png") {
     item.src = ""
     item2 = true
@@ -138,23 +151,26 @@ item.addEventListener("click", function () {
 })
 
 leftbtn.addEventListener("click", function () {
+  // if there is an exit, left button will run the exitfuntion
   if (leftbtn.innerText == "EXIT") {
     exit()
-  } else if (leftbtn.innerText == "ENTER") {
+  } else if (leftbtn.innerText == "ENTER") {//if there is an enter, left button will run the enterfunction
     enter()
-    console.log("idk man")
   } else {
+    //next location for right button
     nextId = (frame[nextId].leftmapId)
     mapAdd()
-  }
+  } //adds right and mid buttons if ur on the street
   if (name.innerText == "street") {
     rightbtn.classList.remove("hidden")
     midbtn.classList.remove("hidden")
   }
+  // if there is a turn remove right and mid button 
   if (name.innerText == "turn") {
     rightbtn.classList.add("hidden")
     midbtn.classList.add("hidden")
   }
+  // if there is a road it will remove left button
   if (name.innerText == "road") {
     leftbtn.classList.add("hidden")
   }
@@ -162,26 +178,34 @@ leftbtn.addEventListener("click", function () {
 })
 
 rightbtn.addEventListener("click", function () {
-
+  //next location for right button
   nextId = (frame[nextId].rightmapId)
   mapAdd()
+  //removes right button if its a door
   if (name.innerText == "door") {
     rightbtn.classList.add("hidden")
   }
+  //removes mid and right button if its a turn
   if (name.innerText == "turn") {
     rightbtn.classList.add("hidden")
     midbtn.classList.add("hidden")
 
   }
+  //removes both side buttons if ur in the forest 
   if (name.innerText == "forest road") {
     rightbtn.classList.add("hidden")
     leftbtn.classList.add("hidden")
   }
 });
+
+//forward button or middle higher button
 midbtn.addEventListener("click", function () {
+  //next location for middle/forward button
   nextId = (frame[nextId].mapId)
   item.src = ""
   mapAdd()
+
+  //removes midbtn if its a deadend or the harbour in the title(name)
   if (name.innerText == "the harbour") {
     midbtn.classList.add("hidden")
   }
@@ -191,32 +215,35 @@ midbtn.addEventListener("click", function () {
   }
 
 
-
+  //removes both side buttons if ur in the woods
   if (name.innerText == "woods") {
     rightbtn.classList.add("hidden")
     leftbtn.classList.add("hidden")
 
-
+    //and if ur in the canbin only the back button will show
   } else if (name.innerText == "cabin") {
-    if (item2) {
+
+    if (item2) { // removes the item so it doesent get back after entering the cabin again 
       item.src = ""
     }
+    // adds an item if ur on that quest
     else if (!quest2) { item.src = "https://cdn.discordapp.com/attachments/691020853248262184/1083278564549468190/pixel_stone.png" }
     midbtn.classList.add("hidden")
   }
-
+  //removes all buttons apart from the back button
   if (name.innerText == "office") {
     rightbtn.classList.add("hidden")
     leftbtn.classList.add("hidden")
     midbtn.classList.add("hidden")
-    if (item1) {
+    if (item1) { //removes the item so the player cant retrieve it twice
       item.src = ""
     }
+    // if adds the item if ur on the quest and its not fineshed 
     else if (!quest1) { item.src = "https://cdn.discordapp.com/attachments/691020853248262184/1082946793211449454/pixel_computer.png" } //change
   }
 })
 
-
+//adds next location depending on what direction was pressed
 function mapAdd() {
   name.innerText = (frame[nextId].location)
   back.style.backgroundImage = (frame[nextId].view)
@@ -228,11 +255,12 @@ function mapAdd() {
 }
 
 
-
+//all shopkeeper reactions
 let iskclose = "https://cdn.discordapp.com/attachments/691020853248262184/1083334155938566265/isakclose.png"
 let iskopen = "https://cdn.discordapp.com/attachments/691020853248262184/1083334156131512320/isaktranslusent2.png"
 let iskrecive = "https://cdn.discordapp.com/attachments/691020853248262184/1083334156357992479/recive_isk.png"
 
+//dialog
 shopkeeper.addEventListener("click", function () {
   if (quest2) {
   }
