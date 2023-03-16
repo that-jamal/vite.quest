@@ -64,7 +64,7 @@ function exit() {
   backwardbtn.classList.remove("hidden")
   mapAdd()
 }
-
+let end
 //if the player enters the shop it adds the shopkeeper and if u have an item the shopkeeper holds his hand to recive it 
 function enter() {
   if (!quest1) {
@@ -289,5 +289,14 @@ shopkeeper.addEventListener("click", function () {
   } else if (!quest2) {
     shopkeeper.src = iskopen
     dialog.innerText = "help me find my rock now"
+  }
+  if (dialog.innerText == ("thanks")) {
+    end++
+    if (end == 10) {
+      shopkeeper.src = "https://cdn.discordapp.com/attachments/691020853248262184/1085825791423696947/end.png"
+      back.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/691020853248262184/1085828019010150460/image_8.png)'"
+      dialog.innerText = "sToP iT!";
+      setTimeout("location.reload(true);", 1500)
+    }
   }
 })
