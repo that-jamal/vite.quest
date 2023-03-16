@@ -54,11 +54,10 @@ const frame = [
   },
 ]
 
-//exit the shop
-//nextId = (frame[nextId].leftmapId)
-
 let nextId = 0
 //exit function removes the shopkeeper and adds all the buttons
+
+//exit the shop
 function exit() {
   shopkeeper.src = ""
   dialog.innerText = " "
@@ -106,35 +105,6 @@ backwardbtn.addEventListener("click", function () {
   item.src = ""
   //runs the next location and adds it to all the buttons
   mapAdd()
-
-  // if the player is in the forest it adds the mid buttons or if the player in on the road it adds right and left buttons 
-  if (name.innerText == "forest road") {
-    midbtn.classList.remove("hidden")
-  } else if (name.innerText == "road") {
-    rightbtn.classList.remove("hidden")
-    midbtn.classList.remove("hidden")
-  }
-
-  // if the player is in the central it adds the right and left buttons 
-  if (name.innerText == "central") {
-    rightbtn.classList.remove("hidden")
-    leftbtn.classList.remove("hidden")
-  }
-
-  // if ur on the streets it adds the right and left buttons 
-  if (name.innerText == "street") {
-    rightbtn.classList.remove("hidden")
-    leftbtn.classList.remove("hidden")
-  }
-  // if the player is in the woods it adds the mid button 
-  if (name.innerText == "woods") {
-    midbtn.classList.remove("hidden")
-  }
-  // else if the its a door it adds the middle button and left
-  if (name.innerText == "door") {
-    midbtn.classList.remove("hidden")
-    leftbtn.classList.remove("hidden")
-  }
 })
 
 // items funcion
@@ -157,24 +127,10 @@ leftbtn.addEventListener("click", function () {
   } else if (leftbtn.innerText == "ENTER") {//if there is an enter, left button will run the enterfunction
     enter()
   } else {
-    //next location for right button
+    //next location for left button
     nextId = (frame[nextId].leftmapId)
     mapAdd()
-  } //adds right and mid buttons if ur on the street
-  if (name.innerText == "street") {
-    rightbtn.classList.remove("hidden")
-    midbtn.classList.remove("hidden")
   }
-  // if there is a turn remove right and mid button 
-  if (name.innerText == "turn") {
-    rightbtn.classList.add("hidden")
-    midbtn.classList.add("hidden")
-  }
-  // if there is a road it will remove left button
-  if (name.innerText == "road") {
-    leftbtn.classList.add("hidden")
-  }
-  item.src = ""
 })
 
 rightbtn.addEventListener("click", function () {
@@ -182,46 +138,26 @@ rightbtn.addEventListener("click", function () {
   nextId = (frame[nextId].rightmapId)
   mapAdd()
   //removes right button if its a door
-  if (name.innerText == "door") {
-    rightbtn.classList.add("hidden")
-  }
-  //removes mid and right button if its a turn
-  if (name.innerText == "turn") {
-    rightbtn.classList.add("hidden")
-    midbtn.classList.add("hidden")
-
-  }
-  //removes both side buttons if ur in the forest 
-  if (name.innerText == "forest road") {
-    rightbtn.classList.add("hidden")
-    leftbtn.classList.add("hidden")
-  }
 });
 
 //forward button or middle higher button
 midbtn.addEventListener("click", function () {
   //next location for middle/forward button
   nextId = (frame[nextId].mapId)
-  item.src = ""
   mapAdd()
+})
 
-  //removes midbtn if its a deadend or the harbour in the title(name)
-  if (name.innerText == "the harbour") {
-    midbtn.classList.add("hidden")
-  }
-  if (name.innerText == "deadend") {
-    midbtn.classList.add("hidden")
-    rightbtn.classList.add("hidden")
-  }
+//adds next location depending on what direction was pressed
+function mapAdd() {
+  name.innerText = (frame[nextId].location)
+  back.style.backgroundImage = (frame[nextId].view)
+  leftbtn.innerText = (frame[nextId].leftbutton)
+  rightbtn.innerText = (frame[nextId].rightbutton)
+  midbtn.innerText = (frame[nextId].midbutton)
+  backwardbtn.innerText = (frame[nextId].backbutton)
+  //------------------------------------------------------ 
 
-
-  //removes both side buttons if ur in the woods
-  if (name.innerText == "woods") {
-    rightbtn.classList.add("hidden")
-    leftbtn.classList.add("hidden")
-
-    //and if ur in the canbin only the back button will show
-  } else if (name.innerText == "cabin") {
+  if (name.innerText == "cabin") {
 
     if (item2) { // removes the item so it doesent get back after entering the cabin again 
       item.src = ""
@@ -238,20 +174,60 @@ midbtn.addEventListener("click", function () {
     if (item1) { //removes the item so the player cant retrieve it twice
       item.src = ""
     }
-    // if adds the item if ur on the quest and its not fineshed 
+    //adds the item if ur on the quest and its not fineshed 
     else if (!quest1) { item.src = "https://cdn.discordapp.com/attachments/691020853248262184/1082946793211449454/pixel_computer.png" } //change
   }
-})
+  //removes midbtn if its a deadend or right button and mid button if its an harbour
+  if (name.innerText == "the harbour") {
+    midbtn.classList.add("hidden")
+  }
+  if (name.innerText == "deadend") {
+    midbtn.classList.add("hidden")
+    rightbtn.classList.add("hidden")
+  }
+  //removes both side buttons if ur in the woods and adds mid button
+  if (name.innerText == "woods") {
+    rightbtn.classList.add("hidden")
+    leftbtn.classList.add("hidden")
+    midbtn.classList.remove("hidden")
+    //and if ur in the canbin only the back button will show
+  } else
+    //removes mid and right button if its a turn
+    if (name.innerText == "turn") {
+      rightbtn.classList.add("hidden")
+      midbtn.classList.add("hidden")
 
-//adds next location depending on what direction was pressed
-function mapAdd() {
-  name.innerText = (frame[nextId].location)
-  back.style.backgroundImage = (frame[nextId].view)
-  leftbtn.innerText = (frame[nextId].leftbutton)
-  rightbtn.innerText = (frame[nextId].rightbutton)
-  midbtn.innerText = (frame[nextId].midbutton)
-  backwardbtn.innerText = (frame[nextId].backbutton)
+    }
+  //removes both side buttons if ur in the forest 
+  if (name.innerText == "forest road") {
+    rightbtn.classList.add("hidden")
+    leftbtn.classList.add("hidden")
+    midbtn.classList.remove("hidden")
+  }
+  // if there is a road it will remove left button
+  if (name.innerText == "road") {
+    rightbtn.classList.remove("hidden")
+    midbtn.classList.remove("hidden")
+    leftbtn.classList.add("hidden")
+  }
+  // if the player is in the central it adds the right and left buttons 
+  if (name.innerText == "central") {
+    rightbtn.classList.remove("hidden")
+    leftbtn.classList.remove("hidden")
+  }
+  // if ur on the streets it adds the right and left buttons 
+  if (name.innerText == "street") {
+    rightbtn.classList.remove("hidden")
+    leftbtn.classList.remove("hidden")
+    midbtn.classList.remove("hidden")
+  }
 
+  // else if the its a door it adds the middle button and left
+  if (name.innerText == "door") {
+    midbtn.classList.remove("hidden")
+    leftbtn.classList.remove("hidden")
+    rightbtn.classList.add("hidden")
+  }
 }
 
 
@@ -262,8 +238,10 @@ let iskrecive = "https://cdn.discordapp.com/attachments/691020853248262184/10833
 
 //dialog
 shopkeeper.addEventListener("click", function () {
-  if (quest2) {
-  }
+
+  // if the shop keepers says a line the if gives him the next line
+  // and if u have an item he will play new lines so he can thank you for returning his merchandise
+  // if u complate a quest u will get a new one and it will reapet for ever
 
   if (dialog.innerText == ("i have a quest for you")) {
     shopkeeper.src = iskopen
@@ -314,6 +292,4 @@ shopkeeper.addEventListener("click", function () {
     shopkeeper.src = iskopen
     dialog.innerText = "help me find my rock now"
   }
-
-
 })
