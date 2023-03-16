@@ -292,11 +292,12 @@ shopkeeper.addEventListener("click", function () {
   }
   if (dialog.innerText == ("thanks")) {
     end++
-    if (end == 7) {
-      shopkeeper.src = "https://cdn.discordapp.com/attachments/691020853248262184/1085825791423696947/end.png"
-      back.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/691020853248262184/1085828019010150460/image_8.png)'"
+    if (end == 6) {
+      item.src = "https://cdn.discordapp.com/attachments/691020853248262184/1085825791423696947/end.png"
+      shopkeeper.src = ""
+      back.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/691020853248262184/1085828019010150460/image_8.png')"
       dialog.innerText = "sToP iT!";
-      setTimeout("location.reload(true);", 1500)
+      setTimeout("location.reload(true);", 4000)
     }
   }
 })
