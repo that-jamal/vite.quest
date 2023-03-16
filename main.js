@@ -55,12 +55,10 @@ const frame = [
 ]
 
 let nextId = 0
-//exit function removes the shopkeeper and adds all the buttons
-
 //exit the shop
 function exit() {
   shopkeeper.src = ""
-  dialog.innerText = " "
+  dialog.innerText = ""
   rightbtn.classList.remove("hidden")
   midbtn.classList.remove("hidden")
   backwardbtn.classList.remove("hidden")
