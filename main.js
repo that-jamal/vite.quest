@@ -290,4 +290,13 @@ shopkeeper.addEventListener("click", function () {
     shopkeeper.src = iskopen
     dialog.innerText = "help me find my rock now"
   }
+  if (dialog.innerText == ("thanks")) {
+    end++
+    if (end == 10) {
+      shopkeeper.src = "https://cdn.discordapp.com/attachments/691020853248262184/1085825791423696947/end.png"
+      back.style.backgroundImage = "url('https://cdn.discordapp.com/attachments/691020853248262184/1085828019010150460/image_8.png)'"
+      dialog.innerText = "sToP iT!";
+      setTimeout("location.reload(true);", 1500)
+    }
+  }
 })
